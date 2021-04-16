@@ -28,8 +28,8 @@ def do_deploy(archive_path):
         run("mkdir -p /data/web_static/releases/{}".format(name_file[0]))
         run("tar -xzf /tmp/{} -C\
             /data/web_static/releases/{}".format(fileP[1], name_file[0]))
-        run("rm /tmp/{}".format(fileP[1]))
-        run("mv /data/web_static/releases/{}/web_static/* \
+        run("rm -rf /tmp/{}".format(fileP[1]))
+        run("mv -n /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/".format(name_file[0], name_file[0]))
         run("rm -rf /data/web_static/releases/{}\
             /web_static".format(name_file[0]))
