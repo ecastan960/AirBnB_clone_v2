@@ -19,9 +19,11 @@ def do_deploy(archive_path):
     Returns:
         [type]: [description]
     """
-    if path.exists(archive_path):
-        fileP = archive_path.split('/')
-        name_file = fileP[1].split('.')
+    if path.exists(archive_path) is False:
+        return False
+    fileP = archive_path.split('/')
+    name_file = fileP[1].split('.')
+    try:
         put(archive_path, "/tmp/")
         run("mkdir -p /data/web_static/releases/{}".format(name_file[0]))
         run("tar -xzf /tmp/{} -C\
@@ -33,5 +35,5 @@ def do_deploy(archive_path):
         slink = "ln -s /data/web_static/releases/{} /data/web_static/current"
         run(slink.format(name_file[0]))
         return True
-    else:
+    except Exception:
         return False
