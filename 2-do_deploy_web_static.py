@@ -20,7 +20,15 @@ def do_deploy(archive_path):
         [type]: [description]
     """
     if path.exists(archive_path):
+        fileP = archive_path.split('/')
+        name_file = fileP[1].split('.')
         put(archive_path, "/tmp/")
+        run("mkdir -p /data/web_static/releases/{}".format(name_file[0]))
+        run("tar -xzf /tmp/{} -C\
+            /data/web_static/releases/{}".format(fileP[1], name_file[0]))
+        run("rm /tmp/{}".format(fileP[1]))
+        run("mv /data/web_static/releases/{}/web_static/* \
+            /data/web_static/releases/{}/".format(name_file[0], name_file[0]))
         return True
     else:
         return False
