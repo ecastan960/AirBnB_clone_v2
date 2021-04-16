@@ -20,7 +20,7 @@ def do_deploy(archive_path):
         [type]: [description]
     """
     if path.exists(archive_path):
-        put(archive_path, remote_path="/tmp/")
+        put(archive_path, "/tmp/")
         return True
     else:
         return False
