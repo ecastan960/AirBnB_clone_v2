@@ -6,7 +6,7 @@ from flask import Flask, redirect, url_for
 app = Flask(__name__)
 
 
-@app.route("/, strict_slashes=False")
+@app.route("/", strict_slashes=False)
 def home():
     """Route / definition
 
